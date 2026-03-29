@@ -17,7 +17,7 @@ builder.Services.AddScoped<CreatePaymentHandler>();
 
 builder.Services.AddScoped<IPaymentRepository, InMemoryPaymentRepository>();
 
-builder.Services.AddScoped<IPaymentPublisher, FakePaymentPublisher>();
+builder.Services.AddSingleton<IPaymentPublisher, RabbitMqPaymentPublisher>();
 
 builder.Services.AddScoped<CreatePaymentHandler>();
 

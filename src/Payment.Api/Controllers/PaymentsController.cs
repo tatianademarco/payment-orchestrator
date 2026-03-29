@@ -16,9 +16,15 @@ namespace Payment.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePayment(
-        CreatePaymentCommand command)
+        public async Task<IActionResult> CreatePayment(CreatePaymentRequest request)
         {
+            var command = new CreatePaymentCommand
+            {
+                Amount = request.Amount,
+                Currency = request.Currency,
+                CardNumber = request.CardNumber
+            };
+
             var paymentId = await _handler.Handle(command);
 
             return Accepted(new { paymentId });
